@@ -1,5 +1,5 @@
 {
-"homepage": "https://kritamategunt.github.io/q-a_thai_mp",
+  "homepage": "https://kritamategunt.github.io/q-a_thai_mp/",
   "name": "mp_thai_subject",
   "private": true,
   "version": "0.0.0",
@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -f"
   },
   "dependencies": {
     "react": "^19.1.1",
