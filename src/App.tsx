@@ -1,11 +1,10 @@
 import './App.css'
+import AppRouter from './routes/Routes'
 
 function App() {
 
   return (
-    <div>
-      <h1>Test thai mp</h1>
-    </div>
+    <AppRouter />
   )
 }
 
