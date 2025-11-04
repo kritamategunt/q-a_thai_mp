@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 import HomePage from '../pages/homepage';
 import ApplicationLayout from '../layouts/applicationLayout';
+import LowerSecondary from '../pages/question/lower_secondary';
 
 const ConfigRoutes = () => {
     const routes = useRoutes([
@@ -13,8 +14,16 @@ const ConfigRoutes = () => {
                     children: [
                         { index: true, element: <HomePage /> },
                         {
-                            element: <div>About Page</div>,
-                            path: 'about',
+                            element: <LowerSecondary />,
+                            path: '/primary_1',
+                        },
+                        {
+                            element: <>404:NOT FOUND</>,
+                            path: '/primary_2',
+                        },
+                        {
+                            element: <>404:NOT FOUND</>,
+                            path: '/upper-secondary',
                         }
                     ],
                 },
