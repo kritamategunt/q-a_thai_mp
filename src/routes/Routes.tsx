@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 import HomePage from '../pages/homepage';
 import ApplicationLayout from '../layouts/applicationLayout';
