@@ -24,9 +24,9 @@ export default function ApplicationLayout() {
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
                     <h1 className="text-xl font-semibold">{labelHeader()}</h1>
                     <nav className="space-x-4">
-                       {window.location.pathname !== '/' && (
-                           <a href="/" className="text-blue-500 hover:underline">หน้าแรก</a>
-                       )}
+                        {window.location.pathname !== '/' && (
+                            <a href="/" className="text-blue-500 hover:underline">หน้าแรก</a>
+                        )}
                     </nav>
                 </div>
             </header>
@@ -40,8 +40,9 @@ export default function ApplicationLayout() {
             </main>
 
             {/* 🔹 Footer */}
-            <footer className="mt-auto bg-white border-t">
-                <div className="mx-auto max-w-7xl px-4 py-3 text-center text-sm text-gray-500">
+            <footer className="mt-auto bg-white border-t justify-center py-4">
+                <div>version 0.0.1</div>
+                <div className="mx-auto max-w-7xl px-4 py-3 text-sm text-gray-500">
                     © {new Date().getFullYear()} Kritamate G. All rights reserved.
                 </div>
             </footer>
