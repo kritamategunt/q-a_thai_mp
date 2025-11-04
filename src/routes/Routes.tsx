@@ -1,20 +1,24 @@
 import React, { Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
+import HomePage from '../pages/homepage';
+import ApplicationLayout from '../layouts/applicationLayout';
 
 const ConfigRoutes = () => {
     const routes = useRoutes([
         {
             children: [
                 {
-                    element: <div>Home Page</div>,
-                    index: true,
-                    path: '/',
-                    // เลือกช่วงชั่้นการศึกษา
+                    path: "/",
+                    element: <ApplicationLayout />,
+                    children: [
+                        { index: true, element: <HomePage /> },
+                        {
+                            element: <div>About Page</div>,
+                            path: 'about',
+                        }
+                    ],
                 },
-                {
-                    element: <div>About Page</div>,
-                    path: 'about',
-                }
+
             ]
         }
     ]);
@@ -22,7 +26,7 @@ const ConfigRoutes = () => {
 }
 
 
-export default function Routes() {
+export default function AppRouter() {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <ConfigRoutes />
