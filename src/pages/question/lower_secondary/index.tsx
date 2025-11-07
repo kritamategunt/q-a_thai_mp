@@ -1,10 +1,36 @@
-import React from 'react'
+import { useEffect, useState } from "react"
+import { getRandomQuestion } from "../../../components/randomQuestion";
+import Set1 from "./setOfQuestions/set1";
 
 function LowerSecondary() {
+
+    const [setOfQuestions, setSetOfQuestions] = useState<number | null>(null);
+
+
+    const randomQuestion = () => {
+        const question = getRandomQuestion(2);
+        setSetOfQuestions(question);
+        console.log(question);
+    };
+
+    const renderSetOfQuestion = () => {
+        if (setOfQuestions === 1) {
+            return <Set1 />;
+        } else if (setOfQuestions === 2) {
+            return <div>set2</div>;
+        } else {
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        randomQuestion();
+    }, []);
+
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black p-4">
-            <h1 className="text-2xl font-bold mb-6 text-white">หน้าช่วงชั้นมัธยมศึกษาตอนต้น</h1>
-            <p className="text-white">เนื้อหาสำหรับช่วงชั้นมัธยมศึกษาตอนต้นจะถูกเพิ่มในเร็วๆ นี้</p>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-[#1e5d9c] p-4">
+            {renderSetOfQuestion()}
         </div>
     )
 }

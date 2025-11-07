@@ -1,12 +1,9 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
+import logo from "../assets/logoMp.jpeg";
 
 export default function ApplicationLayout() {
-
     const labelHeader = () => {
         switch (window.location.pathname) {
-            case '/':
-                return '';
             case '/primary_1':
                 return 'ช่วงชั้นที่ 1';
             case '/primary_2':
@@ -14,37 +11,43 @@ export default function ApplicationLayout() {
             case '/upper-secondary':
                 return 'ช่วงชั้นที่ 3';
             default:
-                return '';
+                return 'อ่านคิดลึก';
         }
     };
+
     return (
-        <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900">
-            {/* 🔹 Header */}
-            <header className="bg-white shadow-sm">
-                <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-                    <h1 className="text-xl font-semibold">{labelHeader()}</h1>
-                    <nav className="space-x-4">
-                       {window.location.pathname !== '/' && (
-                           <a href="/" className="text-blue-500 hover:underline">หน้าแรก</a>
-                       )}
-                    </nav>
+        <div className="min-h-screen flex flex-col bg-linear-to-b from-blue-50 to-white">
+            {/* ✅ HEADER */}
+            <header className="bg-linear-to-b from-[#0d3c74] to-[#1e5d9c] text-white shadow-md sticky top-0 z-10">
+                <div className="mx-auto max-w-md w-full px-4 py-4 flex items-center gap-4">
+                    <div className="bg-white text-[#224E8A] w-14 h-14 rounded-full flex items-center justify-center">
+                        {/* <FaGraduationCap size={32} /> */}
+                        <img src={logo} alt="Logo" className="w-10 h-10" />
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-bold text-[#FFFFFF]">{labelHeader()}</h1>
+                    </div>
                 </div>
             </header>
 
-            {/* 🔹 Main Content */}
-            <main className="flex-1">
-                <div className="mx-auto max-w-7xl px-4 py-6">
-                    {/* Render children or route outlet */}
+
+            {/* ✅ Main Content */}
+            <main className="flex-1 ">
+                <div className="w-full px-4">
                     <Outlet />
                 </div>
             </main>
 
-            {/* 🔹 Footer */}
-            <footer className="mt-auto bg-white border-t">
-                <div className="mx-auto max-w-7xl px-4 py-3 text-center text-sm text-gray-500">
-                    © {new Date().getFullYear()} Kritamate G. All rights reserved.
+            {/* ✅ FOOTER – matching rounded card style */}
+            <footer className="mt-6 mb-4 mx-auto w-full max-w-md">
+                <div className="bg-white shadow-sm rounded-2xl border p-4 text-center">
+                    <p className="text-gray-600 text-sm">version 0.0.2</p>
+                    <p className="text-gray-400 text-xs mt-1">
+                        © {new Date().getFullYear()} Kritamate G. All rights reserved.
+                    </p>
                 </div>
             </footer>
+
         </div>
     );
 }

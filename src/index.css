@@ -2,11 +2,18 @@
   font-family: 'Promt';
   src: url(./assets/fonts/Prompt-Regular.ttf) format('woff2');
 }
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 body {
   font-family: 'Promt', sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #E4F0FE;
+}
+
+/* Hide scrollbars for webkit browsers */
+::-webkit-scrollbar {
+  display: none;
 }
