@@ -18,6 +18,7 @@ export interface QuestionBoxProps {
     }[]
 }
 
+
 const QuestionBox = ({
     title,
     setOf,
@@ -25,6 +26,50 @@ const QuestionBox = ({
     headerParagraph,
     question
 }: QuestionBoxProps) => {
+
+    const showResult = (score: number, total: number, correct: number, incorrect: number, timeTaken: any) => {
+        Swal.fire({
+            title: '',
+            html: `
+      <div class="bg-white w-full rounded-2xl p-6 shadow-md max-w-xs mx-auto">
+        <h2 class="text-gray-600 text-sm font-medium">Your Score</h2>
+        <p class="text-4xl font-bold mt-1">${score}/${total}</p>
+        <p class="text-lg text-gray-500 font-semibold">${Math.round((score / total) * 100)}%</p>
+
+        <div class="flex justify-center my-3">
+          ${'<span class="text-yellow-400 text-xl">★</span>'.repeat(Math.round((score / total) * 5))}
+        </div>
+
+        <div class="grid gap-3 mt-5 text-sm">
+          <div class="flex justify-between bg-green-100 p-3 rounded-lg">
+            <span class="flex gap-2 items-center">
+              ✅ Correct Answers
+            </span>
+            <span class="font-bold">${correct}</span>
+          </div>
+          <div class="flex justify-between bg-red-100 p-3 rounded-lg">
+            <span class="flex gap-2 items-center">
+              ❌ Incorrect Answers
+            </span>
+            <span class="font-bold">${incorrect}</span>
+          </div>
+          <div class="flex justify-between bg-blue-100 p-3 rounded-lg">
+            <span class="flex gap-2 items-center">
+              ⏱ Time Taken
+            </span>
+            <span class="font-bold">${timeTaken}</span>
+          </div>
+        </div>
+      </div>
+    `,
+            showConfirmButton: true,
+            confirmButtonText: 'ตกลง',
+            background: 'transparent',
+            customClass: {
+                popup: 'p-0 border-0 shadow-none',
+            }
+        });
+    };
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
@@ -51,12 +96,7 @@ const QuestionBox = ({
             cancelButtonText: 'ยกเลิก',
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'ส่งคำตอบเรียบร้อย!',
-                    text: `คุณได้คะแนน ${score} จาก ${question.length} ข้อ`,
-                    icon: 'success',
-                    confirmButtonText: 'ตกลง',
-                });
+              showResult(score, question.length, score, question.length - score, '2 นาที 30 วินาที');
             }
         });
     }

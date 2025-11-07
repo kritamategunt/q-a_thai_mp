@@ -4,8 +4,8 @@ function Set1() {
 
 
     const questionsSet1: QuestionBoxProps = {
-        title: 'string',
-        setOf: 'string',
+        title: 'ช่วงชั้นที่ 1',
+        setOf: '1',
         shortParagraph: 'วันหนึ่งแม่พามายด์ไปตลาด  มายด์เห็นลูกแมวสีดำหน้าตาน่ารักตัวหนึ่ง เธอขอแม่ซื้อมันกลับบ้าน มายด์ตั้งชื่อว่า มันนี่ ทุกเช้ามายด์ตื่นแต่เช้าเพื่อให้นมและเล่นด้วยกันอย่างสนุกสนาน',
         headerParagraph: 'อ่านข้อความแล้วตอบคำถาม',
         question: [{
