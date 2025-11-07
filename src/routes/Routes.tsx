@@ -24,7 +24,8 @@ const ConfigRoutes = () => {
                         {
                             element: <>404:NOT FOUND</>,
                             path: '/upper-secondary',
-                        }
+                        },
+                  
                     ],
                 },
 
