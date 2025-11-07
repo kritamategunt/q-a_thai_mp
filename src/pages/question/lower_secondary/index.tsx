@@ -17,7 +17,7 @@ function LowerSecondary() {
         if (setOfQuestions === 1) {
             return <Set1 />;
         } else if (setOfQuestions === 2) {
-            return <div>set2</div>;
+            return <div>ทดสอบระบบสุ่ม รีหน้าเว็บอีกครั้งเพื่อดู demo</div>;
         } else {
             return null;
         }
@@ -29,7 +29,7 @@ function LowerSecondary() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-[#1e5d9c] p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
             {renderSetOfQuestion()}
         </div>
     )

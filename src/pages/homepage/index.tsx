@@ -21,7 +21,7 @@ const HomePage = () => {
             id: '1',
             title: 'ช่วงชั้นที่ 1',
             subtitle: 'ประถมศึกษาปีที่ 1-3',
-            description: 'Basic reading, math, and science concepts',
+            description: 'การอ่านจับใจความสำหรับเด็กประถมศึกษาตอนต้น',
             bg: 'bg-[#31CE69]',
             iconClass: 'fas fa-seedling',
             iconBgColor: 'text-green-500',
@@ -31,7 +31,7 @@ const HomePage = () => {
             id: '2',
             title: 'ช่วงชั้นที่ 2',
             subtitle: 'ประถมศึกษาปีที่ 4-6',
-            description: 'Advanced topics in math, science, and literature',
+            description: 'การอ่าน...คิดให่หน่อย',
             bg: 'bg-[#488FF7]',
             iconClass: 'fas fa-school',
             iconBgColor: 'text-blue-500',
@@ -41,7 +41,7 @@ const HomePage = () => {
             id: '3',
             title: 'ช่วงชั้นที่ 3',
             subtitle: 'มัธยมศึกษาปีที่ 1-3',
-            description: 'Complex subjects and exam preparation',
+            description: 'คิดคำอธิบายให้หน่อยยยย',
             bg: 'bg-[#AC5DF8]',
             iconClass: 'fas fa-university',
             iconBgColor: 'text-purple-500',
@@ -74,7 +74,7 @@ const HomePage = () => {
 
                             className={`w-full max-w-md rounded-sm shadow-md overflow-hidden cursor-pointer bg-white transition hover:bg-opacity-50 `}                   >
                             {/* Top section */}
-                            <div className={`${level.bg} px-5 py-4 text-white flex items-center justify-between`}>
+                            <div className={`${level.bg} px-5 py-4 text-white flex items-center justify-between shadow-md`}>
                                 <div className="flex items-start gap-3">
                                     <div>
                                         <h3 className="font-semibold text-lg">{level.title}</h3>
