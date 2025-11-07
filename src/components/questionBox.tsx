@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { indexIdGenerator } from "../utils/idGenarator"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 export interface QuestionBoxProps {
@@ -26,13 +26,37 @@ const QuestionBox = ({
     headerParagraph,
     question
 }: QuestionBoxProps) => {
+    const [timeElapsed, setTimeElapsed] = useState(0);
+    const [timerActive, setTimerActive] = useState(true);
+    const navigate = useNavigate();
+    const formatTime = (seconds: number) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes} นาที ${remainingSeconds} วินาที`;
+    };
+
+    useEffect(() => {
+
+        let timer: number;
+        if (timerActive) {
+            timer = setInterval(() => {
+                setTimeElapsed((prev) => prev + 1);
+            }, 1000);
+        }
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, [timerActive]);
 
     const showResult = (score: number, total: number, correct: number, incorrect: number, timeTaken: any) => {
         Swal.fire({
             title: '',
             html: `
       <div class="bg-white w-full rounded-2xl p-6 shadow-md max-w-xs mx-auto">
-        <h2 class="text-gray-600 text-sm font-medium">Your Score</h2>
+        <h2 class="text-gray-600 text-sm font-medium">คุณได้คะแนน</h2>
+        <h2 class="text-gray-600 text-sm font-medium">${title}: คำถามชุดที่ ${setOf}</h2>
+
         <p class="text-4xl font-bold mt-1">${score}/${total}</p>
         <p class="text-lg text-gray-500 font-semibold">${Math.round((score / total) * 100)}%</p>
 
@@ -43,22 +67,23 @@ const QuestionBox = ({
         <div class="grid gap-3 mt-5 text-sm">
           <div class="flex justify-between bg-green-100 p-3 rounded-lg">
             <span class="flex gap-2 items-center">
-              ✅ Correct Answers
+              ✅ จำนวนคำตอบถูกต้อง
             </span>
             <span class="font-bold">${correct}</span>
           </div>
           <div class="flex justify-between bg-red-100 p-3 rounded-lg">
             <span class="flex gap-2 items-center">
-              ❌ Incorrect Answers
+              ❌ จำนวนคำตอบผิด
             </span>
             <span class="font-bold">${incorrect}</span>
           </div>
           <div class="flex justify-between bg-blue-100 p-3 rounded-lg">
             <span class="flex gap-2 items-center">
-              ⏱ Time Taken
+              ⏱ ใช้เวลา
             </span>
             <span class="font-bold">${timeTaken}</span>
           </div>
+          <p>*อย่าลืมแคปรูปหน้าจอให้พี่ๆดูด้วยละ!</p>
         </div>
       </div>
     `,
@@ -68,6 +93,8 @@ const QuestionBox = ({
             customClass: {
                 popup: 'p-0 border-0 shadow-none',
             }
+        }).then(() => {
+            navigate('/');
         });
     };
 
@@ -96,14 +123,19 @@ const QuestionBox = ({
             cancelButtonText: 'ยกเลิก',
         }).then((result) => {
             if (result.isConfirmed) {
-              showResult(score, question.length, score, question.length - score, '2 นาที 30 วินาที');
+                setTimerActive(false);
+                showResult(score, question.length, score, question.length - score, formatTime(timeElapsed));
             }
         });
     }
 
+    useEffect(() => {
+        setScore(0);
+    }, [setOf]);
+
     return (
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 space-y-4">
-
+            <h1 className="text-right">{formatTime(timeElapsed)}</h1>
             <h1 className="text-xl font-bold">{title}: คำถามชุดที่ {setOf}</h1>
 
             <div className="text-sm text-gray-600">
@@ -131,6 +163,8 @@ const QuestionBox = ({
                             <input type="radio" name={`q${currentQuestionIndex}`} onClick={() => {
                                 if (option.isCorrect) {
                                     setScore(score + 1);
+                                } else {
+                                    setScore(score + 0);
                                 }
                             }} />
                             {option.optionText}
