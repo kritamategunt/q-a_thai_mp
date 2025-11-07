@@ -1,49 +1,100 @@
-import { useNavigate } from 'react-router-dom';
 
-interface LevelProps {
-    id: number;
-    name: string;
+import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+interface LevelCardProps {
+    id: string;
+    title: string;
+    subtitle: string;
     description: string;
+    bg: string;
+    iconClass: string;
+    iconBgColor: string;
     route: string;
-    isOpen?: boolean;
 }
 
-function HomePage() {
-
-
+const HomePage = () => {
     const navigate = useNavigate();
 
-    const levels: LevelProps[] = [
-        { id: 1, name: 'ช่วงชั้นที่ 1', description: 'สำหรับนักเรียนชั้นประถมศึกษาปีที่ 1–3', route: '/primary_1' },
-        { id: 2, name: 'ช่วงชั้นที่ 2', description: 'สำหรับนักเรียนชั้นประถมศึกษาปีที่ 4-6', route: '/primary_2', isOpen: false },
-        { id: 3, name: 'ช่วงชั้นที่ 3', description: 'สำหรับนักเรียนมัธยมศึกษาปีที่ 1–3', route: '/upper-secondary', isOpen: false },
+    const levels: LevelCardProps[] = [
+        {
+            id: '1',
+            title: 'ช่วงชั้นที่ 1',
+            subtitle: 'ประถมศึกษาปีที่ 1-3',
+            description: 'Basic reading, math, and science concepts',
+            bg: 'bg-[#31CE69]',
+            iconClass: 'fas fa-seedling',
+            iconBgColor: 'text-green-500',
+            route: '/primary_1'
+        },
+        {
+            id: '2',
+            title: 'ช่วงชั้นที่ 2',
+            subtitle: 'ประถมศึกษาปีที่ 4-6',
+            description: 'Advanced topics in math, science, and literature',
+            bg: 'bg-[#488FF7]',
+            iconClass: 'fas fa-school',
+            iconBgColor: 'text-blue-500',
+            route: '/primary_2'
+        },
+        {
+            id: '3',
+            title: 'ช่วงชั้นที่ 3',
+            subtitle: 'มัธยมศึกษาปีที่ 1-3',
+            description: 'Complex subjects and exam preparation',
+            bg: 'bg-[#AC5DF8]',
+            iconClass: 'fas fa-university',
+            iconBgColor: 'text-purple-500',
+            route: '/upper-secondary'
+        },
+
     ];
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black p-4">
-            <h1 className="text-2xl font-bold mb-6">เลือกช่วงชั้นการศึกษา</h1>
-            <div className="grid gap-4 w-1/2">
-                {levels.map((level) => (
-                    <>
-                        <button key={level.id}
-                            className={`bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow mb-4 ${level.isOpen === false ? 'cursor-not-allowed' : 'hover:text-blue-300 cursor-pointer'}`}
-                            onClick={() => navigate(level.route)}
-                            disabled={level.isOpen === false}
-                        >
+        <div className="min-h-screen bg-gray-100 px-4">
+            {/* ✅ CONTENT */}
+            <main className="max-w-4xl mx-auto px-4 py-10">
 
-                            <h2 className="text-xl font-semibold mb-2">{level.name}</h2>
-                            <p className="text-gray-600">{level.description}</p>
-                            {level.isOpen === false ? (
-                                <p className="mt-4 text-red-500 font-bold">เร็วๆ นี้</p>
-                            ) : null}
+                {/* Welcome */}
+                <h2 className="text-center text-2xl font-bold mb-2">ยินดีต้อนรับ</h2>
+                <p className="text-center text-gray-600 mb-8">
+                    โปรดเลือกระดับการศึกษาเพื่อตอบคำถาม
+                </p>
+
+                <h3 className="text-center text-xl font-semibold mb-6">
+                    เลือกช่วงชั้นการศึกษา
+                </h3>
+
+                {/* ✅ LEVEL OPTIONS */}
+                <div className="flex flex-col space-y-4 items-center justify-center w-full">
+                    {levels.map((level) => (
+                        <button
+                            key={level.id}
+                            onClick={() => { navigate(level.route) }}
+
+                            className={`w-full max-w-md rounded-sm shadow-md overflow-hidden cursor-pointer bg-white transition hover:bg-opacity-50 `}                   >
+                            {/* Top section */}
+                            <div className={`${level.bg} px-5 py-4 text-white flex items-center justify-between`}>
+                                <div className="flex items-start gap-3">
+                                    <div>
+                                        <h3 className="font-semibold text-lg">{level.title}</h3>
+                                        <p className="text-sm text-start">{level.subtitle}</p>
+                                    </div>
+                                </div>
+
+                                <FaArrowRight size={18} />
+                            </div>
+
+                            {/* Bottom section */}
+                            <div className="px-5 py-4">
+                                <p className="text-gray-700 text-sm mb-3">{level.description}</p>
+                            </div>
                         </button>
-                        <br />
-                    </>
-
-                ))}
-            </div>
+                    ))}
+                </div>
+            </main>
         </div>
+    );
+};
 
-    )
-}
-
-export default HomePage
+export default HomePage;
