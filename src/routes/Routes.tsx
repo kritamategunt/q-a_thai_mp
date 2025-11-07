@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom'
 import HomePage from '../pages/homepage';
 import ApplicationLayout from '../layouts/applicationLayout';
 import LowerSecondary from '../pages/question/lower_secondary';
+import ThankYou from '../pages/thankYou';
 
 const ConfigRoutes = () => {
     const routes = useRoutes([
@@ -25,7 +26,10 @@ const ConfigRoutes = () => {
                             element: <>404:NOT FOUND</>,
                             path: '/upper-secondary',
                         },
-                  
+                        {
+                            element: <ThankYou />,
+                            path: '/thank-you',
+                        },
                     ],
                 },
 
