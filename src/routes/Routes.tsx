@@ -5,6 +5,7 @@ import ApplicationLayout from '../layouts/applicationLayout';
 import LowerSecondary from '../pages/question/lower_secondary';
 import ThankYou from '../pages/thankYou';
 import PrimaryLv1 from '../pages/question/primary_lv1';
+import PrimaryLv2 from '../pages/question/primary_lv2';
 
 const ConfigRoutes = () => {
     const routes = useRoutes([
@@ -24,7 +25,7 @@ const ConfigRoutes = () => {
                             path: '/primary_2',
                         },
                         {
-                            element: <>404:NOT FOUND</>,
+                            element: <PrimaryLv2/>,
                             path: '/upper-secondary',
                         },
                         {
