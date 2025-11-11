@@ -6,7 +6,13 @@ function Set1() {
     const questionsSet1: QuestionBoxProps = {
         title: 'ช่วงชั้นที่ 1',
         setOf: '1',
-        shortParagraph: 'วันหนึ่งแม่พามายด์ไปตลาด  มายด์เห็นลูกแมวสีดำหน้าตาน่ารักตัวหนึ่ง เธอขอแม่ซื้อมันกลับบ้าน มายด์ตั้งชื่อว่า มันนี่ ทุกเช้ามายด์ตื่นแต่เช้าเพื่อให้นมและเล่นด้วยกันอย่างสนุกสนาน',
+        shortParagraph: [
+            {
+                label: '',
+                text: 'วันหนึ่งแม่พามายด์ไปตลาด  มายด์เห็นลูกแมวสีดำหน้าตาน่ารักตัวหนึ่ง เธอขอแม่ซื้อมันกลับบ้าน มายด์ตั้งชื่อว่า มันนี่ ทุกเช้ามายด์ตื่นแต่เช้าเพื่อให้นมและเล่นด้วยกันอย่างสนุกสนาน',
+                appliesTo: { start: 0, end: 4 }
+            }
+        ],
         headerParagraph: 'อ่านข้อความแล้วตอบคำถาม',
         question: [{
             questionNumber: 1,
@@ -50,6 +56,7 @@ function Set1() {
             options: [{
                 optionText: 'แม่พามายด์ไปตลาด  ',
                 optionId: 1,
+                isCorrect: true
             }, {
                 optionText: 'ขอแม่มายด์ป้อนนมลูกแมว',
                 optionId: 2
@@ -69,6 +76,7 @@ function Set1() {
             options: [{
                 optionText: 'มีน้ำใจ',
                 optionId: 1,
+                isCorrect: true
             }, {
                 optionText: 'เอื้อเฟื้อเผื่อแผ่',
                 optionId: 2

@@ -5,7 +5,11 @@ import Swal from 'sweetalert2';
 export interface QuestionBoxProps {
     title: string,
     setOf: string,
-    shortParagraph: string,
+    shortParagraph: {
+        label: string;
+        text: string | string[];
+        appliesTo: { start: number; end: number };
+    }[],
     headerParagraph?: string,
     question: {
         questionNumber: number,
@@ -173,7 +177,25 @@ const QuestionBox = ({
 
             <div className="p-4 bg-blue-50 rounded-lg">
                 <h2 className="font-semibold mb-2">{headerParagraph}</h2>
-                <p className="text-sm text-gray-700">{shortParagraph}</p>
+                <p className="text-sm text-gray-700">{shortParagraph
+                    .filter(p =>
+                        currentQuestion.questionNumber >= p.appliesTo.start &&
+                        currentQuestion.questionNumber <= p.appliesTo.end
+                    )
+                    .map((p, index) => (
+                        <div key={index}>
+                            <p className="font-bold text-blue-600 mb-1">{p.label}</p>
+
+                            {Array.isArray(p.text) ? (
+                                p.text.map((line, idx) => (
+                                    <p key={idx} className="text-sm text-gray-700 mb-2">{line}</p>
+                                ))
+                            ) : (
+                                <p className="text-sm text-gray-700">{p.text}</p>
+                            )}
+                        </div>
+                    ))
+                }</p>
             </div>
 
             <div>
