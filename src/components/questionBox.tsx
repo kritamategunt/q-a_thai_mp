@@ -5,7 +5,11 @@ import Swal from 'sweetalert2';
 export interface QuestionBoxProps {
     title: string,
     setOf: string,
-    shortParagraph: string,
+    shortParagraph: {
+        label: string;
+        text: string | string[];
+        appliesTo: { start: number; end: number };
+    }[],
     headerParagraph?: string,
     question: {
         questionNumber: number,
@@ -28,6 +32,7 @@ const QuestionBox = ({
 }: QuestionBoxProps) => {
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [timerActive, setTimerActive] = useState(true);
+    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number | null }>({});
     const navigate = useNavigate();
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -103,6 +108,7 @@ const QuestionBox = ({
     const currentQuestion = question[currentQuestionIndex];
 
     const handleNext = () => {
+        console.log('Next question,current score:', score);
         if (currentQuestionIndex < question.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
@@ -129,6 +135,26 @@ const QuestionBox = ({
         });
     }
 
+    const handleCheckedScore = (option: { optionId: number, isCorrect?: boolean }) => {
+        setSelectedAnswers((prev) => {
+            const updated = { ...prev, [currentQuestionIndex]: option.optionId };
+
+            // Recalculate score
+            let newScore = 0;
+            question.forEach((q, index) => {
+                const selectedId = updated[index];
+                if (selectedId) {
+                    const selectedOption = q.options.find(o => o.optionId === selectedId);
+                    if (selectedOption?.isCorrect) newScore++;
+                }
+            });
+
+            setScore(newScore);
+            return updated;
+        });
+    };
+
+
     useEffect(() => {
         setScore(0);
     }, [setOf]);
@@ -151,7 +177,25 @@ const QuestionBox = ({
 
             <div className="p-4 bg-blue-50 rounded-lg">
                 <h2 className="font-semibold mb-2">{headerParagraph}</h2>
-                <p className="text-sm text-gray-700">{shortParagraph}</p>
+                <p className="text-sm text-gray-700">{shortParagraph
+                    .filter(p =>
+                        currentQuestion.questionNumber >= p.appliesTo.start &&
+                        currentQuestion.questionNumber <= p.appliesTo.end
+                    )
+                    .map((p, index) => (
+                        <div key={index}>
+                            <p className="font-bold text-blue-600 mb-1">{p.label}</p>
+
+                            {Array.isArray(p.text) ? (
+                                p.text.map((line, idx) => (
+                                    <p key={idx} className="text-sm text-gray-700 mb-2">{line}</p>
+                                ))
+                            ) : (
+                                <p className="text-sm text-gray-700">{p.text}</p>
+                            )}
+                        </div>
+                    ))
+                }</p>
             </div>
 
             <div>
@@ -160,13 +204,9 @@ const QuestionBox = ({
                 <div className="space-y-2">
                     {currentQuestion.options.map((option) => (
                         <label key={option.optionId} className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50">
-                            <input type="radio" name={`q${currentQuestionIndex}`} onClick={() => {
-                                if (option.isCorrect) {
-                                    setScore(score + 1);
-                                } else {
-                                    setScore(score + 0);
-                                }
-                            }} />
+                            <input type="radio" name={`q${currentQuestionIndex}`}
+                                checked={selectedAnswers[currentQuestionIndex] === option.optionId}
+                                onChange={() => handleCheckedScore(option)} />
                             {option.optionText}
                         </label>
                     ))}

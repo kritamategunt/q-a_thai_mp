@@ -3,7 +3,8 @@ import { getRandomQuestion } from "../../../components/randomQuestion";
 import Set1 from "./setOfQuestions/set1";
 import Set2 from "./setOfQuestions/set2";
 
-function LowerSecondary() {
+
+function PrimaryLv1() {
 
     const [setOfQuestions, setSetOfQuestions] = useState<number | null>(null);
 
@@ -36,4 +37,4 @@ function LowerSecondary() {
     )
 }
 
-export default LowerSecondary
+export default PrimaryLv1
