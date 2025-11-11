@@ -28,6 +28,7 @@ const QuestionBox = ({
 }: QuestionBoxProps) => {
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [timerActive, setTimerActive] = useState(true);
+    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number | null }>({});
     const navigate = useNavigate();
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -103,6 +104,7 @@ const QuestionBox = ({
     const currentQuestion = question[currentQuestionIndex];
 
     const handleNext = () => {
+        console.log('Next question,current score:', score);
         if (currentQuestionIndex < question.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
@@ -128,6 +130,26 @@ const QuestionBox = ({
             }
         });
     }
+
+    const handleCheckedScore = (option: { optionId: number, isCorrect?: boolean }) => {
+        setSelectedAnswers((prev) => {
+            const updated = { ...prev, [currentQuestionIndex]: option.optionId };
+
+            // Recalculate score
+            let newScore = 0;
+            question.forEach((q, index) => {
+                const selectedId = updated[index];
+                if (selectedId) {
+                    const selectedOption = q.options.find(o => o.optionId === selectedId);
+                    if (selectedOption?.isCorrect) newScore++;
+                }
+            });
+
+            setScore(newScore);
+            return updated;
+        });
+    };
+
 
     useEffect(() => {
         setScore(0);
@@ -160,13 +182,9 @@ const QuestionBox = ({
                 <div className="space-y-2">
                     {currentQuestion.options.map((option) => (
                         <label key={option.optionId} className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50">
-                            <input type="radio" name={`q${currentQuestionIndex}`} onClick={() => {
-                                if (option.isCorrect) {
-                                    setScore(score + 1);
-                                } else {
-                                    setScore(score + 0);
-                                }
-                            }} />
+                            <input type="radio" name={`q${currentQuestionIndex}`}
+                                checked={selectedAnswers[currentQuestionIndex] === option.optionId}
+                                onChange={() => handleCheckedScore(option)} />
                             {option.optionText}
                         </label>
                     ))}

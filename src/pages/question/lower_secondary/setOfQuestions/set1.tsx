@@ -44,6 +44,64 @@ function Set1() {
                 optionId: 4
             }]
         },
+        {
+            questionNumber: 3,
+            questionText: 'เหตุการณ์ใดเกิดขึ้นเป็นอันดับที่ ๒',
+            options: [{
+                optionText: 'แม่พามายด์ไปตลาด  ',
+                optionId: 1,
+            }, {
+                optionText: 'ขอแม่มายด์ป้อนนมลูกแมว',
+                optionId: 2
+            }, {
+                optionText: 'มันนี่เป็นชื่อของแมว',
+                optionId: 3
+            }, {
+                optionText: 'แม่ซื้อลูกแมวสีดำ ',
+                optionId: 4,
+                isCorrect: true
+            }
+            ]
+        },
+        {
+            questionNumber: 4,
+            questionText: 'ลักษณะนิสัยของมายด์ตรงกับข้อใด',
+            options: [{
+                optionText: 'มีน้ำใจ',
+                optionId: 1,
+            }, {
+                optionText: 'เอื้อเฟื้อเผื่อแผ่',
+                optionId: 2
+            }, {
+                optionText: 'เสียสละ',
+                optionId: 3
+            }, {
+                optionText: 'เมตตา',
+                optionId: 4,
+                isCorrect: true
+            }
+            ]
+        },
+        {
+            questionNumber: 5,
+            questionText: 'มายด์เห็นลูกแมวสีดำหน้าตาน่ารักตัวหนึ่ง  มีตัวสะกดมาตราใด (ตามลำดับ)',
+            options: [{
+                optionText: 'เกย กม เกอว  กก  กง  กง',
+                optionId: 1,
+            }, {
+                optionText: 'เกอว  กง กก กน กบ กง',
+                optionId: 2
+            }, {
+                optionText: 'เกย กน กก เกอว กก  กง',
+                optionId: 3,
+                isCorrect: true
+            }, {
+                optionText: 'เกอว  กน  กก  กง กก กง',
+                optionId: 4,
+
+            }
+            ]
+        },
         ]
     }
 
