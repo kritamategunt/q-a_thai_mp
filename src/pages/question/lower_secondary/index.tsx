@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getRandomQuestion } from "../../../components/randomQuestion";
 import Set1 from "./setOfQuestions/set1";
+import Set2 from "./setOfQuestions/set2";
 
 function LowerSecondary() {
 
@@ -17,7 +18,7 @@ function LowerSecondary() {
         if (setOfQuestions === 1) {
             return <Set1 />;
         } else if (setOfQuestions === 2) {
-            return <div>ทดสอบระบบสุ่ม รีหน้าเว็บอีกครั้งเพื่อดู demo</div>;
+            return <Set2 />;
         } else {
             return null;
         }
