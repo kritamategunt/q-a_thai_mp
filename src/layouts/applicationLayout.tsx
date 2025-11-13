@@ -41,7 +41,7 @@ export default function ApplicationLayout() {
             {/* ✅ FOOTER – matching rounded card style */}
             <footer className="mt-6 mb-4 mx-auto w-full max-w-md">
                 <div className="bg-white shadow-sm rounded-2xl border p-4 text-center">
-                    <p className="text-gray-600 text-sm">version 0.0.3</p>
+                    <p className="text-gray-600 text-sm">version 1.0.0</p>
                     <p className="text-gray-400 text-xs mt-1">
                         © {new Date().getFullYear()} Kritamate G. All rights reserved.
                     </p>
